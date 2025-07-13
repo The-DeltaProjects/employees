@@ -11,7 +11,7 @@ class EmployeesFactoryTest {
 
     @Test
     void testBuildSuccess() {
-        Employees employee = EmployeesFactory.buildEmployee( 123L, "John", "Doe", "john@gmail,com", "Developer");
+        Employees employee = EmployeesFactory.buildEmployee( "Luyanda", "Makhanya", "luyanda@gmail.com",  "Developer");
         assertNotNull(employee);
         assertEquals(123L, employee.getId());
         assertEquals("John", employee.getFirstName());
