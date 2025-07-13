@@ -1,9 +1,6 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Employees {
@@ -13,6 +10,8 @@ public class Employees {
 
     private String firstName;
     private String lastName;
+
+    @Column(unique = true)
     private String email;
     private String position;
 
@@ -32,6 +31,7 @@ public class Employees {
     }
 
     public String getFirstName() {
+
         return firstName;
     }
 
@@ -40,9 +40,11 @@ public class Employees {
     }
 
     public String getEmail() {
+
         return email;
     }
     public String getPosition() {
+
         return position;
     }
 
