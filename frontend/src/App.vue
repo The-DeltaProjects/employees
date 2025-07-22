@@ -24,16 +24,16 @@
           <br />
 
           <label for="fName">First Name : </label><br />
-          <input type="text" id="fName" placeholder="" /><br />
+          <input type="text" id="fName" v-model="form.firstname" placeholder="" /><br />
 
           <label class="snl" for="sName">Second Name : </label><br />
-          <input class="sn" type="text" id="sName" placeholder="" /><br />
+          <input class="sn" type="text" id="sName" v-model="form.lastname" placeholder="" /><br />
 
           <label for="email">Email : </label><br />
-          <input type="email" id="email" placeholder="" /><br />
+          <input type="email" id="email" v-model="form.email" placeholder="" /><br />
 
           <label for="position">Position :</label><br />
-          <input type="text" id="position" placeholder="" /><br />
+          <input type="text" id="position" v-model="form.position" placeholder="" /><br />
           <br />
           <div class="myButtons">
             <button class="add">Add</button>
@@ -48,7 +48,7 @@
     <br />
 
     <transition name="fade">
-      <div class="table" v-show="showTable">
+      <div class="table" v-if="showTable">
         <table border="1" cellpadding="8">
           <thead>
             <tr>
@@ -65,6 +65,10 @@
             </tr>
           </tbody>
         </table>
+        <div class="tableButtons">
+          <button @click="goBack" class="back-btn">Back to Form</button>
+          <button @click="Update" class="clear-btn">update</button>
+        </div>
       </div>
     </transition>
   </div>
@@ -101,12 +105,23 @@ export default {
           position: "Product Manager",
         },
       ],
+      form: {
+        firstname: '',
+        lastname: '',
+        email: '',
+        position: ''
+      }
     };
   },
   methods: {
     toggleView() {
+      console.log("Before toggle:", this.showTable);
       this.showTable = true;
+      this.$nextTick(() => {
+        console.log("After toggle:", this.showTable);
+      });
     }
+
   }
 
 };
@@ -127,7 +142,6 @@ body,
   position: relative;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
 }
 
 .bg-image {
@@ -164,11 +178,17 @@ label {
 
 .table {
   position: relative;
-  margin-left: 550px;
-  margin-top: -350px;
-  background-color: white;
-  width: 430px
+  margin-left: 420px;
+  margin-top: 60px;
+  background-color: rgba(119, 117, 117, 0.821);
+  color: white;
+  width: 500px;
+  height: auto;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
 
 .form {
   position: relative;
