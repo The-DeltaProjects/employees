@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -85,24 +87,10 @@ export default {
       employees: [
         {
           id: 1,
-          firstname: "Alice",
-          lastname: "Johnson",
-          email: "alice@example.com",
-          position: "Developer",
-        },
-        {
-          id: 2,
-          firstname: "Bob",
-          lastname: "Smith",
-          email: "bob@example.com",
-          position: "Designer",
-        },
-        {
-          id: 3,
-          firstname: "Charlie",
-          lastname: "Brown",
-          email: "charlie@example.com",
-          position: "Product Manager",
+          firstname: "",
+          lastname: "",
+          email: "",
+          position: "",
         },
       ],
       form: {
@@ -113,14 +101,48 @@ export default {
       }
     };
   },
+
+  mounted() {
+    axios.get('http://localhost:8080/employee/Employee')
+      .then((response) => {
+        console.warn('Fetched employee data:', response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching employee data:', error);
+      });
+  },
+
   methods: {
     toggleView() {
       console.log("Before toggle:", this.showTable);
       this.showTable = true;
-      this.$nextTick(() => {
-        console.log("After toggle:", this.showTable);
-      });
-    }
+    },
+    goBack() {
+      this.showTable = false;
+    },
+    update() {
+      this.showTable = false;
+    },
+    /*addEmployees() {
+      axios.post('http://localhost:8080/employee/Employee', this.form)
+        .then(response => {
+          console.log('Employees added:', response.data);
+
+          this.employees.push(response.data);
+
+          this.form = {
+            firstname: '',
+            lastname: '',
+            email: '',
+            position: '',
+          };
+        })
+        .catch(error => {
+          console.error('Error adding employee:', error);
+        });
+    },*/
+
+
 
   }
 
